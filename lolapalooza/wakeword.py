@@ -34,9 +34,9 @@ class WakeWordDetector:
         self._on_wake = on_wake
         self._running = False
         self._thread  = None
-        # Reuse the tiny model for speed — wake word detection doesn't need accuracy
-        logger.info("Loading wake word Whisper model (tiny)…")
-        self._model = WhisperModel("tiny", device=WHISPER_DEVICE, compute_type=WHISPER_COMPUTE)
+        # Reuse the base model for speed — wake word detection doesn't need accuracy
+        logger.info("Loading wake word Whisper model (base)…")
+        self._model = WhisperModel("base", device=WHISPER_DEVICE, compute_type=WHISPER_COMPUTE)
         logger.info(f"Wake word detector ready — listening for '{WAKE_WORD}'")
 
     def start(self):
@@ -79,7 +79,7 @@ class WakeWordDetector:
                         wf.setframerate(SAMPLE_RATE)
                         wf.writeframes(audio.tobytes())
 
-                    segments, _ = self._model.transcribe(tmp_path, beam_size=1)
+                    segments, _ = self._model.transcribe(tmp_path, beam_size=1, language = "en")
                     text = " ".join(s.text for s in segments).lower().strip()
 
                     if text:

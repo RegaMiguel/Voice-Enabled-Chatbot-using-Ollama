@@ -68,7 +68,7 @@ def handle_search(text: str) -> str:
     query = re.sub(
         r"^(thursday,?\s*)?(search|look up|find|what is|who is|where is|"
         r"when did|how do|tell me about)\s*",
-        "", text, flags = re.IGNORECASE).strip or text
+        "", text, flags = re.IGNORECASE).strip() or text
 
     raw_results = skills.search(query)
     summary_prompt = (
