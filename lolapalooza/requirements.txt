@@ -1,0 +1,12 @@
+sounddevice
+webrtcvad-wheels
+scipy
+pyaudio
+
+faster-whisper
+
+duckduckgo-search
+
+psutil
+
+pyttsx3

@@ -18,8 +18,8 @@ logger = logging.getLogger("jarvis.main")
 
 from speaker import speak
 from listener import record_until_silence
-from transcriber import transcribe
-from brain import process, Intent
+from transcriber import transcribe_audio
+from brain import handle_search, process, Intent
 from wakeword import WakeWordDetector
 from skills import check_due_now, check_warnings
 
@@ -42,7 +42,7 @@ def session_start():
             speak("I didn't catch that. sir.")
             return
         
-        text = transcribe(AUDIO_FILE)
+        text = transcribe_audio(AUDIO_FILE)
         if not text:
             speak ("Sorry, I couldn't understand you, sir.")
             return
@@ -110,7 +110,7 @@ Press Ctrl+C to force quit.
     threading.Thread(target=_sysmon_loop, daemon = True, name="sysmon").start()
 
     detector = WakeWordDetector(on_wake=lambda: threading.Thread(
-        target=handle_start, daemon=True
+        target= handle_search, daemon=True
     ).start())
 
     detector.start()

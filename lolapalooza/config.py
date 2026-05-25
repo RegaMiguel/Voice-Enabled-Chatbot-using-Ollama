@@ -3,7 +3,7 @@
 # ============================================================
 
 # --- Wake Word ---
-WAKE_WORD = "jarvis"           # pvporcupine keyword (free built-in)
+WAKE_WORD = "Thursday"           # pvporcupine keyword (free built-in)
 WAKE_SENSITIVITY = 0.6         # 0.0 (strict) → 1.0 (loose)
 
 # --- Audio ---
